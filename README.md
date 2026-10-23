@@ -8,6 +8,8 @@ Open a terminal in this folder and run:
 
 ```sh
 python3 -m http.server 4174 --bind 127.0.0.1 --directory dist
+git add -A && git commit -m "your message" && git push
+
 ```
 
 Open http://localhost:4174/ and keep the terminal open. No npm install is needed.
