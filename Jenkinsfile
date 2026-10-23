@@ -12,7 +12,8 @@ spec:
   containers:
   - name: playwright
     # Match this tag to the @playwright/test version in package.json
-    image: mcr.microsoft.com/playwright:v1.64.1-jammy    command: ["sleep"]
+    image: mcr.microsoft.com/playwright:v1.64.1-jammy    
+    command: ["sleep"]
     args: ["infinity"]
     resources:
       requests:
