@@ -12,7 +12,7 @@ spec:
   containers:
   - name: playwright
     # Match this tag to the @playwright/test version in package.json
-    image: mcr.microsoft.com/playwright:v1.64.1-jammy    
+    image: mcr.microsoft.com/playwright:v1.64.1-jammy
     command: ["sleep"]
     args: ["infinity"]
     resources:
@@ -39,14 +39,17 @@ spec:
         stage('Install') {
             steps {
                 sh 'npm ci'
-                // FlowLab's webServer serves dist with Python - install it if the image lacks it
                 sh 'command -v python3 || (apt-get update && apt-get install -y python3)'
             }
         }
 
         stage('Test') {
+            environment {
+                PLAYWRIGHT_JUNIT_OUTPUT_NAME = 'test-results/junit.xml'
+                PLAYWRIGHT_HTML_OPEN = 'never'
+            }
             steps {
-                sh 'npx playwright test'
+                sh 'npx playwright test --reporter=list,html,junit'
             }
         }
     }
